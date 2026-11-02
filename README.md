@@ -1,19 +1,35 @@
-# React + Vite
+# React Props
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This Vite app is a small lesson about **props**: values a parent component passes to a child component to configure what it renders.
 
-Currently, two official plugins are available:
+## What the app demonstrates
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+In `src/App.jsx`, the parent `App` renders two `ProfileCard` components with different `name`, `role`, and `location` props. `ProfileCard` destructures those values from its props object and displays them. The nested paragraphs are passed through the special `children` prop.
 
-## React Compiler
+```jsx
+function ProfileCard({ name, role, location, children }) {
+  return (
+    <article>
+      <h2>{name}</h2>
+      <p>{role}</p>
+      <p>Based in {location}</p>
+      {children}
+    </article>
+  )
+}
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+<ProfileCard name="Ada Lovelace" role="Frontend developer" location="London">
+  <p>Currently exploring accessible UI.</p>
+</ProfileCard>
+```
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+Props are read-only inputs. To change something in response to interaction, use state in the component that owns that data and pass values or callbacks down as props.
 
-## Expanding the ESLint configuration
+## Run the app
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npm install
+npm run dev
+```
+
+The lesson is implemented in `src/App.jsx`; `src/App.css` and `src/index.css` provide the starter visual design.
